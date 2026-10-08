@@ -1,0 +1,28 @@
+import { expect, test } from 'claude-code/testing'
+import { answered, band, clear, done, item, offerText, pane, reset, say, store } from './kit.ts'
+
+test('smoke: correction -> offer -> retro -> approve -> fill', async ($, on) => {
+  reset(on)
+  await clear($)
+  await say($, '不對，取消上一個做法')
+  await done($)
+  expect(store.classified.length).toBe(1)
+  expect(await offerText($)).toBeDefined()
+  store.fork = () => answered(JSON.stringify([item(1), item(2)]))
+  const b = await band($)
+  await b.press({ key: 'retro-go' })
+  await b.unmount()
+  expect(store.opens).toBe(1)
+  expect(store.forkPrompts.length).toBe(1)
+  const p = await pane($)
+  expect(await p.find({ type: 'Text', text: /變更1/ })).toBeDefined()
+  await p.press({ key: 'toggle0' })
+  await p.press({ key: 'send' })
+  expect(store.fills.length).toBe(1)
+  expect(store.fills[0]?.text.startsWith('【復盤】')).toBe(true)
+  expect(store.fills[0]?.text.includes('變更1')).toBe(true)
+  expect(store.fills[0]?.text.includes('變更2')).toBe(false)
+  expect(store.closes).toBe(1)
+  expect(store.writes.length).toBe(0)
+  await p.unmount()
+})
