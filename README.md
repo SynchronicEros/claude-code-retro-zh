@@ -2,6 +2,28 @@
 
 你在對話裡糾正 Claude（指出錯誤、取消先前做法、宣告日後一律如何）時，這些教訓若沒寫進記憶或規則檔，下個 session 會重犯。retro 偵測到糾正就**主動提議**復盤，產出擬固定的教訓讓你**逐項核准**，核准的才交給主對話寫入。**Mod 本身不寫任何檔**，寫入照常經過 session 的權限設定與專案規則。
 
+## 安裝
+
+**需要 Claude Code（付費方案）；Codex 免費版不能安裝。**
+
+本 Mod 另需 Claude Code **v2.1.287 以上**（Mods API 仍屬 early access，引擎更新可能使 Mod 失效）。查版本：
+
+```bash
+claude --version
+```
+
+Windows：Windows 版 Claude Code 也能安裝；本 Mod 不呼叫外部指令，不需另裝工具（作者尚未在 Windows 實機測試）。
+
+```bash
+claude plugin marketplace add SynchronicEros/claude-code-retro-zh
+```
+
+```bash
+claude plugin install retro@claude-code-retro-zh
+```
+
+安裝或更新後，**新開的 session 才會生效**。全部 Mod 與 skill 一起管理，見總目錄 [claude-code-mods-zh](https://github.com/SynchronicEros/claude-code-mods-zh)。
+
 ## 流程
 
 1. 你送出疑似糾正的話 → 關鍵詞初篩命中後，以小模型（預設 haiku）確認。
@@ -30,28 +52,12 @@
 
 初篩未命中不呼叫模型；命中時小模型確認一次；按［復盤］時分身一次（共用 prompt cache）。
 
----
-
-**English:** When you correct Claude, retro offers a retrospective above the prompt. Accepting forks the session for up to five lasting lessons, shown in a pane for item-by-item approval; approved items go back to the main thread as your draft (starting with 【復盤】), so writing stays under the session's own permissions and rules — the mod writes nothing itself. Options: `classifierModel` (default `haiku`), `maxSkips` (default 2), `forbiddenTargets` (comma-separated substrings; matching targets are dropped). The keyword pre-filter is tuned for Chinese.
-
----
-
-## 安裝
-
-需要 Claude Code **v2.1.287 以上**（Mods API 仍屬 early access，引擎更新可能使 Mod 失效）。
-
-```bash
-claude plugin marketplace add SynchronicEros/claude-code-retro-zh
-```
-
-```bash
-claude plugin install retro@claude-code-retro-zh
-```
-
-安裝或更新後，**新開的 session 才會生效**。全部 Mod 與 skill 一起管理，見總目錄 [claude-code-mods-zh](https://github.com/SynchronicEros/claude-code-mods-zh)。
-
 ## 授權
 
 MIT（見 [LICENSE](LICENSE)）。
 
-**Install / License (English):** Claude Code v2.1.287+. `claude plugin marketplace add SynchronicEros/claude-code-retro-zh`, then `claude plugin install retro@claude-code-retro-zh`; takes effect in new sessions. All mods and skills: [claude-code-mods-zh](https://github.com/SynchronicEros/claude-code-mods-zh). MIT.
+---
+
+**English:** When you correct Claude, retro offers a retrospective above the prompt. Accepting forks the session for up to five lasting lessons, shown in a pane for item-by-item approval; approved items go back to the main thread as your draft (starting with 【復盤】), so writing stays under the session's own permissions and rules — the mod writes nothing itself. Options: `classifierModel` (default `haiku`), `maxSkips` (default 2), `forbiddenTargets` (comma-separated substrings; matching targets are dropped). The keyword pre-filter is tuned for Chinese.
+
+**Install / License (English):** Requires Claude Code (a paid plan); the free Codex tier cannot install it. Claude Code v2.1.287+ (check with `claude --version`); works on Windows without extra tools (not yet tested there). `claude plugin marketplace add SynchronicEros/claude-code-retro-zh`, then `claude plugin install retro@claude-code-retro-zh`; takes effect in new sessions. All mods and skills: [claude-code-mods-zh](https://github.com/SynchronicEros/claude-code-mods-zh). MIT.
