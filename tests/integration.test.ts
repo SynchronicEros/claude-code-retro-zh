@@ -172,15 +172,22 @@ test('D8 (control) peer / task / plugin / channel origins never reach classify',
 })
 
 // ---------------------------------------------------------------- R7
-test('D17 a 【復盤】 hand-off with leading whitespace is not classified', async ($, on) => {
+test('D17 a 【檢討】 hand-off with leading whitespace is not classified', async ($, on) => {
   reset(on)
   await clear($)
-  await say($, '  【復盤】以下是我已逐項核准的復盤項目：1. 以後一律用繁中')
+  await say($, '  【檢討】以下是我已逐項核准的檢討項目：1. 以後一律用繁中')
+  expect(store.classified.length).toBe(0)
+})
+
+test('D17b a pre-0.6.0 【復盤】 hand-off is still not classified', async ($, on) => {
+  reset(on)
+  await clear($)
+  await say($, '【復盤】以下是我已逐項核准的復盤項目：1. 以後一律用繁中')
   expect(store.classified.length).toBe(0)
 })
 
 // ---------------------------------------------------------------- R4 failure paths
-test('D11 fork rejects: pane must not stay on 復盤中 forever', async ($, on) => {
+test('D11 fork rejects: pane must not stay on 檢討中 forever', async ($, on) => {
   reset(on)
   await clear($)
   await say($, '不對，你搞錯了')
@@ -191,7 +198,7 @@ test('D11 fork rejects: pane must not stay on 復盤中 forever', async ($, on) 
   await b.unmount()
   await tick()
   const p = await pane($)
-  const stuck = await p.find({ type: 'Text', text: /復盤中/ })
+  const stuck = await p.find({ type: 'Text', text: /檢討中/ })
   await p.unmount()
   expect(stuck).toBe(undefined)
 })
@@ -226,7 +233,7 @@ test('D13 empty / failed result has a way to close the pane', async ($, on) => {
   expect(buttons.length).toBeGreaterThan(0)
 })
 
-test('D14 close refused after 全部略過: pane must not say 復盤中', async ($, on) => {
+test('D14 close refused after 全部略過: pane must not say 檢討中', async ($, on) => {
   reset(on)
   const p = await openReview($, [item(1)])
   store.closeThrows = true
@@ -234,7 +241,7 @@ test('D14 close refused after 全部略過: pane must not say 復盤中', async 
   await p.press({ key: 'close' })
   await p.unmount()
   const q = await pane($)
-  const stuck = await q.find({ type: 'Text', text: /復盤中/ })
+  const stuck = await q.find({ type: 'Text', text: /檢討中/ })
   await q.unmount()
   expect(stuck).toBe(undefined)
 })

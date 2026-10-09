@@ -1,13 +1,13 @@
 {
   "name": "retro",
-  "version": "0.5.0",
-  "description": "復盤：偵測到使用者在糾正 Claude 時主動提議復盤，逐項核准後交由主對話寫入記憶／規則檔",
+  "version": "0.6.0",
+  "description": "檢討：偵測到使用者在糾正 Claude 時主動提議檢討，逐項核准後交由主對話寫入記憶／規則檔",
   "author": {
     "name": "SynchronicEros"
   },
   "keywords": [
     "retro",
-    "復盤",
+    "檢討",
     "function-hooks",
     "ui"
   ],
@@ -22,14 +22,14 @@
     "maxSkips": {
       "type": "number",
       "title": "連續略過幾次後靜音",
-      "description": "同一 session 連續按［略過］達此次數後，本 session 不再提議復盤。須填 1 以上整數（小數取整、小於 1 用預設 2）；填文字會使本 Mod 無法載入。",
+      "description": "同一 session 連續按［略過］達此次數後，本 session 不再提議檢討。須填 1 以上整數（小數取整、小於 1 用預設 2）；填文字會使本 Mod 無法載入。",
       "required": false,
       "default": 2
     },
     "forbiddenTargets": {
       "type": "string",
       "title": "禁止寫入的路徑",
-      "description": "以逗號分隔；復盤建議的寫入目標含其中任一字樣（不分大小寫）即整項丟棄。",
+      "description": "以逗號分隔；檢討建議的寫入目標含其中任一字樣（不分大小寫）即整項丟棄。",
       "required": false,
       "default": ""
     }

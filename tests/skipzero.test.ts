@@ -14,5 +14,5 @@ test('E16 maxSkips 0 (control, documents behaviour): treated as default 2, not "
   }
   await say($, '還是錯，不要用英文')
   await done($)
-  expect({ toasts: store.toasts, offered: (await offerText($)) !== undefined }).toEqual({ toasts: ['已連續略過 2 次，本 session 不再提議復盤'], offered: false })
+  expect({ toasts: store.toasts, offered: (await offerText($)) !== undefined }).toEqual({ toasts: ['已連續略過 2 次，本 session 不再提議檢討'], offered: false })
 })

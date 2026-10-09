@@ -39,7 +39,7 @@ test('E1b the facts-only fallback of a long log keeps the correction at its end 
   expect(store.fills[0]?.text.includes('一律用 pnpm')).toBe(true)
 })
 
-test('E2 pressing 復盤 twice forks once', async ($, on) => {
+test('E2 pressing 檢討 twice forks once', async ($, on) => {
   reset(on)
   await correct($)
   store.noInvalidate = true
@@ -111,7 +111,7 @@ test('E5 a correction holding a flag emoji (tag characters) keeps its text', asy
   expect(store.forkPrompts[0]?.includes('一律用 pnpm')).toBe(true)
 })
 
-test('E6 a second 復盤 does not silently discard a review with approvals', async ($, on) => {
+test('E6 a second 檢討 does not silently discard a review with approvals', async ($, on) => {
   reset(on)
   store.fork = () => answered(JSON.stringify([item(1)]))
   await correct($)
@@ -156,7 +156,7 @@ test('E8 facts-only hand-off asks the main thread to confirm the target before w
   await p.press({ key: 'send' })
   await p.unmount()
   const text = store.fills[0]?.text ?? ''
-  expect(text.startsWith('【復盤】')).toBe(true)
+  expect(text.startsWith('【檢討】')).toBe(true)
   expect(/先.{0,12}(確認|回報|詢問|問我)/.test(text)).toBe(true)
 })
 
@@ -211,7 +211,7 @@ test('E12 (control) facts-only note survives a draft-kept retry', async ($, on) 
 })
 
 
-test('E2b pressing 復盤 twice concurrently (band redraws normally) forks once', async ($, on) => {
+test('E2b pressing 檢討 twice concurrently (band redraws normally) forks once', async ($, on) => {
   reset(on)
   await correct($)
   const b = await band($)

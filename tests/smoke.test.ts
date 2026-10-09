@@ -19,7 +19,7 @@ test('smoke: correction -> offer -> retro -> approve -> fill', async ($, on) => 
   await p.press({ key: 'toggle0' })
   await p.press({ key: 'send' })
   expect(store.fills.length).toBe(1)
-  expect(store.fills[0]?.text.startsWith('【復盤】')).toBe(true)
+  expect(store.fills[0]?.text.startsWith('【檢討】')).toBe(true)
   expect(store.fills[0]?.text.includes('變更1')).toBe(true)
   expect(store.fills[0]?.text.includes('變更2')).toBe(false)
   expect(store.closes).toBe(1)

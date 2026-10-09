@@ -30,7 +30,7 @@ test('garbage and hidden text yield nothing', async () => {
 
 test('handoff prompt is marked so it is not re-detected', async () => {
   const text = approvedPrompt([{ target: 't', kind: 'memory', change: 'c', reason: 'r', preview: 'p', isUpdate: false }])
-  expect(text.startsWith('【復盤】')).toBe(true)
+  expect(text.startsWith('【檢討】')).toBe(true)
   expect(text.includes('t')).toBe(true)
 })
 
@@ -60,9 +60,9 @@ test('reinforce: the fork is told to check memory, update:true is kept and label
 })
 
 test('facts-only item carries the correction, cleaned; nothing when it cleans to empty', async () => {
-  const it = factsOnlyItem('不對，<!-- x -->以後一律用繁中', '復盤失敗：模型沒有回覆。')
+  const it = factsOnlyItem('不對，<!-- x -->以後一律用繁中', '檢討失敗：模型沒有回覆。')
   expect(it?.preview).toBe('不對，以後一律用繁中')
-  expect(it?.reason).toBe('復盤失敗：模型沒有回覆。')
+  expect(it?.reason).toBe('檢討失敗：模型沒有回覆。')
   expect(factsOnlyItem('\u{E0041}', 'n')).toBe(null)
 })
 

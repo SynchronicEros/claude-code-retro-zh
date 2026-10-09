@@ -109,7 +109,7 @@ export function reset(on: On) {
 export const tick = () => new Promise<void>(r => setTimeout(r, 5))
 
 export const ABOVE = { hasSurvey: false, isWorking: false, maxRows: 10, bodyColumns: 100, scroll: { offset: 0, bodyRows: 9 }, view: {} } as never
-export const PANE_PROPS = { title: '復盤', isFocused: true, bodyColumns: 80, placement: 'dock', scroll: { offset: 0, bodyRows: 40 }, view: {} } as never
+export const PANE_PROPS = { title: '檢討', isFocused: true, bodyColumns: 80, placement: 'dock', scroll: { offset: 0, bodyRows: 40 }, view: {} } as never
 
 export async function say($: Engine, text: string, origin: unknown = { kind: 'composer' }, turnId?: string) {
   await $.prompt.submit({ text, wait: false, origin: origin as never, ...(turnId ? { turnId } : {}) })

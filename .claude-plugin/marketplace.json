@@ -4,13 +4,13 @@
     "name": "SynchronicEros"
   },
   "metadata": {
-    "description": "復盤：偵測到你在糾正 Claude 時主動提議復盤，逐項核准後交由主對話寫入記憶或規則檔"
+    "description": "檢討：偵測到你在糾正 Claude 時主動提議檢討，逐項核准後交由主對話寫入記憶或規則檔"
   },
   "plugins": [
     {
       "name": "retro",
       "source": "./",
-      "description": "復盤：偵測到你在糾正 Claude 時主動提議復盤，逐項核准後交由主對話寫入記憶或規則檔"
+      "description": "檢討：偵測到你在糾正 Claude 時主動提議檢討，逐項核准後交由主對話寫入記憶或規則檔"
     }
   ]
 }

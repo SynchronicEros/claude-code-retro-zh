@@ -3,7 +3,7 @@
 /* @jsxFrag Fragment */
 // retro: when the person corrects Claude, offer a retrospective. A keyword
 // pre-filter picks candidate prompts, a small model confirms them, and when
-// that turn ends a band above the prompt offers 復盤／略過／本 session 不再問.
+// that turn ends a band above the prompt offers 檢討／略過／本 session 不再問.
 // Accepting forks the session (shares its prompt cache) for up to five lasting
 // lessons, listed in a pane for item-by-item approval. Approved items go back
 // to the main thread as the person's prompt, so writing stays under the
@@ -76,11 +76,11 @@ async function runRetro($: EngineInterface, correction: string, forbidden: reado
   pane = { kind: 'loading' }
   redraw($)
   try {
-    await $.ui.open({ id: PANE, title: '復盤' })
+    await $.ui.open({ id: PANE, title: '檢討' })
   } catch (error) {
     pane = { kind: 'idle' }
     $.ui.log(`open failed: ${String(error)}`)
-    $.ui.toast('無法開啟復盤面板，請稍後再試')
+    $.ui.toast('無法開啟檢討面板，請稍後再試')
     return
   }
   try {
@@ -222,14 +222,14 @@ export const register: Register = (on, options) => {
             key="retro-go"
             hotkey="r"
             plain
-            label="復盤"
+            label="檢討"
             onPress={() => {
               // One press per offer, one fork at a time, and approvals not yet
               // handed over are never replaced (0.4.0, E2, E6).
               if (offer !== current) return
               if (pane.kind === 'loading' || pane.kind === 'sending') return
               if (pane.kind === 'review' && pane.approved.some(Boolean)) {
-                $.ui.toast('復盤面板裡還有已核准、未交出的項目，請先交出或略過')
+                $.ui.toast('檢討面板裡還有已核准、未交出的項目，請先交出或略過')
                 return
               }
               offer = null
@@ -248,7 +248,7 @@ export const register: Register = (on, options) => {
               skipsInRow += 1
               if (skipsInRow >= maxSkips) {
                 isMuted = true
-                $.ui.toast(`已連續略過 ${skipsInRow} 次，本 session 不再提議復盤`)
+                $.ui.toast(`已連續略過 ${skipsInRow} 次，本 session 不再提議檢討`)
               }
               redraw($)
             }}
@@ -274,13 +274,13 @@ export const register: Register = (on, options) => {
     const view = pane
 
     if (view.kind === 'loading') {
-      return <Text dimColor>復盤中，正在整理這段對話的教訓…</Text>
+      return <Text dimColor>檢討中，正在整理這段對話的教訓…</Text>
     }
     if (view.kind === 'sending') {
       return <Text dimColor>交出中…</Text>
     }
     if (view.kind === 'idle') {
-      return <Text dimColor>目前沒有進行中的復盤，可關閉此面板。</Text>
+      return <Text dimColor>目前沒有進行中的檢討，可關閉此面板。</Text>
     }
     if (view.kind === 'empty') {
       return (
